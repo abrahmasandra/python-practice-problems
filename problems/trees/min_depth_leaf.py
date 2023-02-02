@@ -9,8 +9,8 @@ def min_depth_leaf(tree):
     
     Returns: (integer) the minimum depth of of a leaf in the tree.
     """
-
-    pass
+    
+    return 1 + min([min_depth_leaf(child) for child in tree.children])
 
 
 #############################################################
