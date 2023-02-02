@@ -8,6 +8,31 @@ import sys
 import os
 import re
 
+class Vertex:
+    def __init__(self, name):
+        self.name = name
+        self.edges_to = {}
+    
+    def add_edge_to(self, vertex):
+        self.edges_to[vertex.name] = vertex 
+
+def get_to_gold(start):
+    # bfs
+    visited = set()
+    queue = [start]
+
+    while len(queue) > 0:
+        curr = queue.pop(0)
+        if curr.name == "shiny gold":
+            return True
+        
+        for n in curr.edges_to.values():
+            if n not in visited:
+                queue.append(n)
+        
+        visited.add(curr)
+    
+    return False    
 
 def part1(rules):
     """
@@ -19,8 +44,17 @@ def part1(rules):
 
     Returns an integer
     """
-    ### Replace with your code
-    return None
+    # do we even need amount (?)
+
+    # create the graph
+    gr = {}
+    for color, lst in rules.items():
+        gr[color] = gr.get(color, Vertex(color))
+        for child, _ in lst:
+            child_vertex = gr.get(child, Vertex(child))
+            gr[color].add_edge_to(child_vertex)
+
+    return sum([get_to_gold(color) for color in gr.values()]) - 1
 
 
 def part2(rules):
