@@ -51,8 +51,8 @@ def part1(rules):
     for color, lst in rules.items():
         gr[color] = gr.get(color, Vertex(color))
         for child, _ in lst:
-            child_vertex = gr.get(child, Vertex(child))
-            gr[color].add_edge_to(child_vertex)
+            gr[child] = gr.get(child, Vertex(child))
+            gr[color].add_edge_to(gr[child])
 
     return sum([get_to_gold(color) for color in gr.values()]) - 1
 
