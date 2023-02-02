@@ -13,8 +13,8 @@ class Vertex:
         self.name = name
         self.edges_to = {}
     
-    def add_edge_to(self, vertex):
-        self.edges_to[vertex.name] = vertex 
+    def add_edge_to(self, vertex, num=1):
+        self.edges_to[vertex.name] = (num, vertex) 
 
 def get_to_gold(start):
     # bfs
@@ -26,7 +26,7 @@ def get_to_gold(start):
         if curr.name == "shiny gold":
             return True
         
-        for n in curr.edges_to.values():
+        for _, n in curr.edges_to.values():
             if n not in visited:
                 queue.append(n)
         
@@ -68,8 +68,22 @@ def part2(rules):
     Returns an integer
     """
 
-    ### Replace with your code
-    return None
+    # create the graph
+    gr = {}
+    for color, lst in rules.items():
+        gr[color] = gr.get(color, Vertex(color))
+        for child, num in lst:
+            gr[child] = gr.get(child, Vertex(child))
+            gr[color].add_edge_to(gr[child], num)
+
+    def num_bags(start):
+        total = 0
+        for amt, n in start.edges_to.values():
+            total += amt
+            total += amt*num_bags(n)
+        return total
+
+    return num_bags(gr["shiny gold"])
 
 
 ############################################
@@ -125,4 +139,4 @@ if __name__ == "__main__":
     print(f"Part 1:", part1(rules))
     
     # Uncomment the following line when you're ready to work on Part 2
-    #print(f"Part 2:", part2(rules))
+    print(f"Part 2:", part2(rules))
