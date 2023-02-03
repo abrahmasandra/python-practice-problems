@@ -1,3 +1,4 @@
+import numpy as np
 def compute_matching_indices(x, y):
     """
     Returns a new array consisting of the indices where
@@ -11,8 +12,13 @@ def compute_matching_indices(x, y):
 
     # YOUR CODE HERE
     # Replace None with an appropriate return value
-    return None
+    return np.where(x == y)[0]
     
+if __name__ == "__main__":
+    x = np.array([10,20,30])
+    y = np.array([10,30,30])
+
+    print(compute_matching_indices(x,y))
 
 #############################################################
 ###                                                       ###

@@ -1,3 +1,4 @@
+import numpy as np
 def find_closest_value(x):
     """
     Returns the index and corresponding value in the one-dimensional 
@@ -11,10 +12,12 @@ def find_closest_value(x):
         closest to the mean
     """
     
-    # YOUR CODE HERE
-    # Replace None with an appropriate return value
-    return None
-    
+    dist = np.abs(x - np.mean(x))
+    ind = np.argmin(dist)
+    return (ind, x[ind]) 
+
+if __name__ == "__main__":
+      print(find_closest_value(np.array([1.0, 2.0, 3.0])))
 
 #############################################################
 ###                                                       ###

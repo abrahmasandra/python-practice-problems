@@ -1,3 +1,4 @@
+import numpy as np
 def powers(N, p):
     """
     Return the first N powers of p. For example:
@@ -10,10 +11,10 @@ def powers(N, p):
     Returns: an array consisting of powers of p
     """
 
-    # YOUR CODE HERE
-    # Replace None with an appropriate return value
-    return None
+    return p ** np.arange(N)
 
+if __name__ == "__main__":
+    print(powers(10,2))
 
 #############################################################
 ###                                                       ###

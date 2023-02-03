@@ -1,3 +1,4 @@
+import numpy as np
 def clip_values(x, min_val=None, max_val=None):
     """
     Return a new array with the values clipped. 
@@ -12,9 +13,15 @@ def clip_values(x, min_val=None, max_val=None):
              to (min_val, max-val)
     """
 
-    # YOUR CODE HERE
-    # Replace None with an appropriate return value
-    return None
+    tmp = np.copy(x)
+    if min_val:
+        tmp[tmp < min_val] = min_val
+    if max_val:
+        tmp[tmp > max_val] = max_val
+    return tmp
+
+if __name__ == "__main__":
+    print(clip_values(np.array([1,2,3,4,5,6,7]), min_val=3, max_val=5))
 
 
 #############################################################
