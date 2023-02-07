@@ -44,8 +44,6 @@ def part1(rules):
 
     Returns an integer
     """
-    # do we even need amount (?)
-
     # create the graph
     gr = {}
     for color, lst in rules.items():
