@@ -5,19 +5,35 @@ import numpy as np
 # Note: The rest of the code in this file will not work until you've done this.
 
 ## YOUR CODE HERE ##
-
+morg_df = pd.read_csv("data/morg_d07_strings.csv", index_col="h_id")
 
 # TASKS 2-6
 # For each of the tasks, print the value requested in the task.
 
-## YOUR CODE HERE ##
+## TASK 2
+age = morg_df["age"]
 
+## TASK 3
+row = morg_df.loc["1_2_2", :]
+
+## TASK 4
+first_four = morg_df.iloc[:4, :]
+
+## TASK 5
+col_nan = {}
+for col in morg_df.columns:
+    if any(morg_df.loc[:, col].isna()):
+        col_nan[col] = 0
+
+## TASK 6
+morg_df.fillna(col_nan, inplace=True)
 
 ### Task 7
 ### convert to categoricals
 TO_CATEGORICALS = ["gender", "race", "ethnicity", "employment_status"]
+for col in TO_CATEGORICALS:
+    morg_df[col] = morg_df[col].astype("category")
 
-## YOUR CODE HERE ##
 
 # Example use of cut()
 boundaries = range(16, 89, 8)
@@ -29,6 +45,7 @@ morg_df.loc[:, "age_bin"] = pd.cut(morg_df.loc[:, "age"],
 ### Task 8
 
 ## YOUR CODE HERE ##
+morg_df["hwpw_bin"] = 
 
 print("Morg columns types after Task 8")
 print(morg_df.dtypes)
